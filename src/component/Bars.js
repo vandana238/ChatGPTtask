@@ -1,39 +1,23 @@
-import React from 'react';
 import { Bar } from '@ant-design/plots';
 
-const Bars = () => {
-  const data = [
-    {
-      year: '1951 ',
-      value: 38,
-    },
-    {
-      year: '1952 ',
-      value: 52,
-    },
-    {
-      year: '1956 ',
-      value: 61,
-    },
-    {
-      year: '1957 ',
-      value: 145,
-    },
-    {
-      year: '1958 ',
-      value: 48,
-    },
-  ];
-  const config = {
+const Bars = (props) => {
+var config;
+const data= props.response
+  console.log(props.response)
+  config = {
     data,
-    xField: 'value',
-    yField: 'year',
-    seriesField: 'year',
+    xField: 'product_name',
+    yField: 'profit',
+    seriesField: 'profit',
     legend: {
       position: 'top-left',
     },
   };
-  return <Bar {...config} />;
+
+  return (<>{
+    <Bar {...config} />
+  }
+  </>)
 };
 
 

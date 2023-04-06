@@ -1,46 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Column} from '@ant-design/plots';
+import axios from "axios";
 
-// import { Bar } from '@ant-design/plots';
 const Columns = () => {
-  const data = [
-    {
-      type: 'furniture',
-      sales: 38,
-    },
-    {
-      type: 'appliances',
-      sales: 52,
-    },
-    {
-      type: 'vangrains',
-      sales: 61,
-    },
-    {
-      type: 'oils',
-      sales: 145,
-    },
-    {
-      type: 'foodstuff',
-      sales: 48,
-    },
-    {
-      type: 'beauty "',
-      sales: 38,
-    },
-    {
-      type: 'personal care',
-      sales: 38,
-    },
-    {
-      type: 'annapmaternal and child product',
-      sales: 38,
-    },
-  ];
-  const config = {
+  const [data,setdata]=useState()
+  var config;
+  useEffect(()=>
+  {
+    const question = { title: "Retrieve top 15 orders of the ‘Furniture’ Category and Tables sub-category" };
+      axios.post(`https://insights-portal.azurewebsites.net/postitems`,question).then((response) => {
+      setdata(response.data);
+      console.log(response.data);
+    });
+  
+  
+  },[])
+
+ console.log(data)
+
+  if(data!==undefined)
+  {
+   config = {
     data,
-    xField: 'type',
-    yField: 'sales',
+    xField: 'product_id',
+    yField: 'profit',
     label: {
     
       position: 'middle',
@@ -62,14 +45,14 @@ const Columns = () => {
         alias: 'category',
       },
       sales: {
-        alias: 'sales amount',
+        alias: 'sales',
       },
     },
   };
-return(<><Column {...config} />
+}
+return (<>{
+  data!==undefined?<><Column {...config} />;  </>:<></>
+}
 </>)
 };
-
-
-
 export default Columns;

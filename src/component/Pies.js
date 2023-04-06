@@ -1,34 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from "axios";
 import { Pie } from '@ant-design/plots';
 
 const Pies = () => {
-  const data = [
-    {
-      type: 'beauty',
-      value: 27,
-    },
-    {
-      type: 'foodstuff',
-      value: 25,
-    },
-    {
-      type: 'oils',
-      value: 18,
-    },
-    {
-      type: 'vangrains',
-      value: 15,
-    },
-    {
-      type: 'appliances',
-      value: 10,
-    },
-    {
-      type: 'furniture',
-      value: 5,
-    },
-  ];
-  const config = {
+  const [data,setdata]=useState()
+  var config;
+  useEffect(()=>
+  {
+    const question = { title: "Retrieve top 15 orders of the ‘Furniture’ Category and Tables sub-category" };
+      axios.post(`https://insights-portal.azurewebsites.net/postitems`,question).then((response) => {
+      setdata(response.data);
+      console.log(response.data);
+    });
+  
+  },[])
+
+ console.log(data)
+if(data!==undefined)
+  {
+   config = {
     appendPadding: 10,
     data,
     angleField: 'value',
@@ -49,7 +39,11 @@ const Pies = () => {
       },
     ],
   };
-  return <Pie {...config} />;
+}
+return (<>{
+  data!==undefined?<><Pie {...config} />;  </>:<></>
+}
+</>)
 };
 
 export default Pies;
