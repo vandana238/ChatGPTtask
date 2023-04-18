@@ -7,6 +7,7 @@ import Linegraphs from "./component/Linegraphs";
 import Groupcol from "./component/Groupcol";
 import Question3 from "./component/Question3";
 import { Bar } from 'react-chartjs-2';
+// import Pies from "./component/Pies";
 
 import Graph from "./component/Graph";
 
@@ -57,7 +58,7 @@ const App = () => {
 
       {/* {  que !== undefined ? <div> <Graph response={que} /></div>  : <></>   } */}
       {  que !== undefined ? <div> <Bars response={que} /></div>  : <></>   }
-      
+      {/* {  que !== undefined ? <div> <Pies response={que} /></div>  : <></>   } */}
 
 
     </div>
